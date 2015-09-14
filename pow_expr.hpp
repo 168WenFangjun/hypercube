@@ -23,19 +23,17 @@ public:
 template <typename Iterable1, typename Iterable2> using pow_expr = binary_expr<pow_op, Iterable1, Iterable2>;
 
 template <typename Iterable>
-pow_expr<scalar_expr<typename Iterable::value_type>, const Iterable&>
-pow(typename Iterable::value_type left, const Iterable& right)
+pow_expr<scalar_t<Iterable>, const Iterable&>
+pow(value_t<Iterable> left, const Iterable& right)
 {
-    using ScalarType = scalar_expr<typename Iterable::value_type>;
-    return pow_expr<ScalarType, const Iterable&>(ScalarType(left), right);
+    return pow_expr<scalar_t<Iterable>, const Iterable&>(scalar_t<Iterable>(left), right);
 }
 
 template <typename Iterable>
-pow_expr<const Iterable&, scalar_expr<typename Iterable::value_type>>
-pow(const Iterable& left, typename Iterable::value_type right)
+pow_expr<const Iterable&, scalar_t<Iterable>>
+pow(const Iterable& left, value_t<Iterable> right)
 {
-    using ScalarType = scalar_expr<typename Iterable::value_type>;
-    return pow_expr<const Iterable&, ScalarType>(left, ScalarType(right));
+    return pow_expr<const Iterable&, scalar_t<Iterable>>(left, scalar_t<Iterable>(right));
 }
 
 template <typename Iterable1, typename Iterable2>

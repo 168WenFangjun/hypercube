@@ -21,19 +21,17 @@ public:
 template <typename Iterable1, typename Iterable2> using subtract_expr = binary_expr<subtract_op, Iterable1, Iterable2>;
 
 template <typename Iterable>
-subtract_expr<scalar_expr<typename Iterable::value_type>, const Iterable&>
-operator-(typename Iterable::value_type left, const Iterable& right)
+subtract_expr<scalar_t<Iterable>, const Iterable&>
+operator-(value_t<Iterable> left, const Iterable& right)
 {
-    using ScalarType = scalar_expr<typename Iterable::value_type>;
-    return subtract_expr<ScalarType, const Iterable&>(ScalarType(left), right);
+    return subtract_expr<scalar_t<Iterable>, const Iterable&>(scalar_t<Iterable>(left), right);
 }
 
 template <typename Iterable>
-subtract_expr<const Iterable&, scalar_expr<typename Iterable::value_type>>
-operator-(const Iterable& left, typename Iterable::value_type right)
+subtract_expr<const Iterable&, scalar_t<Iterable>>
+operator-(const Iterable& left, value_t<Iterable> right)
 {
-    using ScalarType = scalar_expr<typename Iterable::value_type>;
-    return subtract_expr<const Iterable&, ScalarType>(left, ScalarType(right));
+    return subtract_expr<const Iterable&, scalar_t<Iterable>>(left, scalar_t<Iterable>(right));
 }
 
 template <typename Iterable1, typename Iterable2>

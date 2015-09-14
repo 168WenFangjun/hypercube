@@ -63,7 +63,8 @@ public:
     }
 };
 
-
+template <typename T> using value_t = typename T::value_type;
+template <typename T> using scalar_t = scalar_expr<typename T::value_type>;
 
 }
 
